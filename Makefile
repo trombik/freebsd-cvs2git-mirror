@@ -12,7 +12,7 @@ CSUP_BASE?=			${BASE_DIRECTORY}/${CSUP_BASE_NAME}
 SUPFILE?=			${BASE_DIRECTORY}/cvs-supfile
 CSUP_PREFIX?=		${.CURDIR}/${BASE_DIRECTORY}/${CVSROOT_NAME}
 
-all:	snapshot csup cvscvt git-fetch rm-cvsignore git-pull git-push
+all:	csup cvscvt git-fetch rm-cvsignore git-pull git-push
 
 init:	mkdir-all supfile git-init
 
