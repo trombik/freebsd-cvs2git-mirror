@@ -37,10 +37,10 @@ git-fetch:
 git-pull:
 	@echo "===> ${.TARGET}"
 .if defined(GIT_REMOTE_URL)
-	(cd ${GIT_DIRECTORY} && git pull ${GIT_REMOTE_NAME} master)
+	cd ${GIT_DIRECTORY} && git pull ${GIT_REMOTE_NAME} master
 .else
 	@echo "GIT_REMOTE_URL is not defined, skipping"
-.fi
+.endif
 
 git-push:
 	@echo "===> ${.TARGET}"
@@ -48,7 +48,7 @@ git-push:
 	(cd ${GIT_DIRECTORY} && git push ${GIT_REMOTE_NAME})
 .else
 	@echo "GIT_REMOTE_URL is not defined, skipping"
-.fi
+.endif
 
 git-init:
 	@echo "===> ${.TARGET}"
@@ -58,8 +58,9 @@ git-init:
 	(cd ${GIT_DIRECTORY} && git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL})
 .else
 	@echo "GIT_REMOTE_URL is not defined, skipping git remote add"
-.fi
-m-cvsignore:
+.endif
+
+rm-cvsignore:
 	@echo "===> ${.TARGET}"
 	rm -f ${GIT_DIRECTORY}/.cvsignore
 
