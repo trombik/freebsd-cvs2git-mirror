@@ -40,7 +40,7 @@ git-fetch:
 git-pull:
 	@echo "===> ${.TARGET}"
 .if defined(GIT_REMOTE_URL)
-	cd ${GIT_DIRECTORY} && git pull ${GIT_REMOTE_NAME} master
+	(cd ${GIT_DIRECTORY} && git pull ${GIT_REMOTE_NAME} master)
 .else
 	@echo "GIT_REMOTE_URL is not defined, skipping"
 .endif
