@@ -71,6 +71,5 @@ supfile:
 	@echo "*default prefix=${CSUP_PREFIX}" >> ${SUPFILE}
 	@echo "*default release=cvs" >> ${SUPFILE}
 	@echo "*default delete use-rel-suffix" >> ${SUPFILE}
-	@echo "*default compress" >> ${SUPFILE}
 	@echo "ports-all" >> ${SUPFILE}
 	@echo "cvsroot-all" >> ${SUPFILE}

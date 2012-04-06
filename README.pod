@@ -50,7 +50,7 @@ the cvs server to contact.
 
 =item  CSUP_FLAGS (-L2)
 
-Additional flags to csup(1).
+Additional flags to csup(1), such as "-z" to enable compression.
 
 =back
 
