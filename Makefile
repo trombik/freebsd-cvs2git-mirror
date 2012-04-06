@@ -1,4 +1,3 @@
-GIT_REMOTE_URL?=
 GIT_REMOTE_NAME?=	github
 CSUP?=				csup
 CSUP_FLAGS?=		-L2
