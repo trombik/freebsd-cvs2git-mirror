@@ -12,6 +12,30 @@ freebsd-cvs2git-mirror - Makefile to convert FreeBSD ports to git repository
 The Makefile does csup, cvscvt and git push to remote git repository for those
 of you maintaining local FreeBSD ports tree.
 
+=head1 REQUIREMENTS
+
+=over
+
+=item git
+
+    > sudo pkg_add -r git
+
+=item cvscvt
+
+L<http://tron.homeunix.org/cvscvt/>, L<git://tron.homeunix.org/cvscvt>
+
+    > git clone git://tron.homeunix.org/cvscvt
+    > cd cvscvt
+    > gmake
+
+cp(1) or install(1) build/default/cvscvt to a directory in $PATH.
+
+=item A remote repository (optional)
+
+With GIT_REMOTE_URL, you can push the mirrored reposiroty to remote host.
+
+=back
+
 =head1 OPTIONS
 
 =over
