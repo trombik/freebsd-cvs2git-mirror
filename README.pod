@@ -4,7 +4,8 @@ freebsd-cvs2git-mirror - Makefile to convert FreeBSD ports to git repository
 
 =head1 SYNOPSIS
 
-FIXME
+> make init
+> make
 
 =head1 DESCRIPTION
 
@@ -13,7 +14,21 @@ of you maintaining local FreeBSD ports tree.
 
 =head1 OPTIONS
 
-FIXME
+=over
+
+=item GIT_REMOTE_URL (empty)
+
+Optionally "git push" to remote git repository if defined.
+
+=item CSUP_HOST (cvsup.freebsd.org)
+
+the cvs server to contact.
+
+=item  CSUP_FLAGS (-L2)
+
+Additional flags to csup(1).
+
+=back
 
 =head1 AUTHORS
 
