@@ -9,7 +9,11 @@ BASE_DIRECTORY?=	work
 CVSROOT_DIRECTORY?=	${BASE_DIRECTORY}/${CVSROOT_NAME}
 GIT_DIRECTORY?=		${BASE_DIRECTORY}/${GIT_NAME}
 CSUP_BASE?=			${BASE_DIRECTORY}/${CSUP_BASE_NAME}
-SUPFILE?=			${BASE_DIRECTORY}/cvs-supfile
+.if defined(SUPFILE)
+_DONOTOVERWRITE_SUPFILE=y
+.else
+SUPFILE=			${BASE_DIRECTORY}/cvs-supfile
+.endif
 CSUP_PREFIX?=		${.CURDIR}/${BASE_DIRECTORY}/${CVSROOT_NAME}
 
 all:	csup cvscvt git-fetch rm-cvsignore git-pull git-push
@@ -26,8 +30,8 @@ csup:
 
 cvscvt:
 	@echo "===> ${.TARGET}"
-	(cd ${BASE_DIRECTORY} && cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY} | \
-		GIT_DIR=${GIT_DIRECTORY}/.git git fast-import)
+	cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY} | \
+		GIT_DIR=${GIT_DIRECTORY}/.git git fast-import
 
 git-fetch:
 	@echo "===> ${.TARGET}"
@@ -65,6 +69,9 @@ rm-cvsignore:
 
 supfile:
 	@echo "===> ${.TARGET}"
+.if defined(_DONOTOVERWRITE_SUPFILE)
+	@echo "SUPFILE is given, will not create automatically"
+.else
 	@echo "# automatically created by Makefile" > ${SUPFILE}
 	@echo "*default host=${CSUP_HOST}" >> ${SUPFILE}
 	@echo "*default base=${CSUP_BASE}" >> ${SUPFILE}
@@ -73,3 +80,4 @@ supfile:
 	@echo "*default delete use-rel-suffix" >> ${SUPFILE}
 	@echo "ports-all" >> ${SUPFILE}
 	@echo "cvsroot-all" >> ${SUPFILE}
+.endif
