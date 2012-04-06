@@ -30,7 +30,7 @@ csup:
 
 cvscvt:
 	@echo "===> ${.TARGET}"
-	cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY} | \
+	cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY}/ports | \
 		GIT_DIR=${GIT_DIRECTORY}/.git git fast-import
 
 git-fetch:
