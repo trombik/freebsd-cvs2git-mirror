@@ -1,0 +1,22 @@
+=head1 NAME
+
+freebsd-cvs2git-mirror - Makefile to convert FreeBSD ports to git repository
+
+=head1 SYNOPSIS
+
+FIXME
+
+=head1 DESCRIPTION
+
+The Makefile does csup, cvscvt and git push to remote git repository for those
+of you maintaining local FreeBSD ports tree.
+
+=head1 OPTIONS
+
+FIXME
+
+=head1 AUTHORS
+
+The original shell script was written by lattera L<https://github.com/lattera/nightlies>
+
+Ported by Tomoyuki Sakurai <tomoyukis@reallyenglish.com>
