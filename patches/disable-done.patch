@@ -1,0 +1,14 @@
+diff --git a/main.cc b/main.cc
+index 54de77e..aea3b6e 100644
+--- a/main.cc
++++ b/main.cc
+@@ -1554,7 +1554,8 @@ set_max_svn:
+ 		cerr << CLEAR "emitting... " << n_commits << " commits, " << n_tags << " tags\n";
+ 
+ 		if (output_format == OUT_GIT) {
+-			cout << "done\n";
++			/* disable "done" command as git-1.7.5 doesn't understand it */
++			/* cout << "done\n"; */
+ 		}
+ 	}
+ 

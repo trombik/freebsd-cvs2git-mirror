@@ -31,6 +31,15 @@ L<http://tron.homeunix.org/cvscvt/>, L<git://tron.homeunix.org/cvscvt>
 
     > git clone git://tron.homeunix.org/cvscvt
     > cd cvscvt
+
+cvscvt assumes newer git that supports "done" command in fast-import. If your
+git doesn't support "done", apply "patches/disable-done.patch". Look for
+"--done" in git-fast-import(1) to see if it does.
+
+    > patch -p1 < path/to/disable-done.patch
+
+Build cvscvt.
+
     > gmake
 
 cp(1) or install(1) build/default/cvscvt to a directory in $PATH.
