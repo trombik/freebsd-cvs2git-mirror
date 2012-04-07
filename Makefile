@@ -1,4 +1,4 @@
-GIT_REMOTE_NAME?=	github
+GIT_REMOTE_NAME?=	origin
 CSUP?=				csup
 CSUP_FLAGS?=		-L2
 CSUP_HOST?=			cvsup.freebsd.org
@@ -16,9 +16,13 @@ SUPFILE=			${BASE_DIRECTORY}/cvs-supfile
 .endif
 CSUP_PREFIX?=		${.CURDIR}/${BASE_DIRECTORY}/${CVSROOT_NAME}
 
-all:	csup cvscvt git-fetch rm-cvsignore git-pull git-push
+all:	csup cvscvt
+
+remote: git-fetch git-push git-pull
 
 init:	mkdir-all supfile git-init
+
+init-remote:	git-remote-add git-push
 
 mkdir-all:
 	@echo "===> ${.TARGET}"
@@ -30,7 +34,7 @@ csup:
 
 cvscvt:
 	@echo "===> ${.TARGET}"
-	cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY}/ports | \
+	cvscvt -e freebsd.org -k FreeBSD ${CVSROOT_DIRECTORY}/ports/* | \
 		GIT_DIR=${GIT_DIRECTORY}/.git git fast-import
 
 git-fetch:
@@ -48,7 +52,7 @@ git-pull:
 git-push:
 	@echo "===> ${.TARGET}"
 .if defined(GIT_REMOTE_URL)
-	(cd ${GIT_DIRECTORY} && git push ${GIT_REMOTE_NAME})
+	(cd ${GIT_DIRECTORY} && git push ${GIT_REMOTE_NAME} master)
 .else
 	@echo "GIT_REMOTE_URL is not defined, skipping"
 .endif
@@ -57,10 +61,12 @@ git-init:
 	@echo "===> ${.TARGET}"
 	find ${GIT_DIRECTORY} -depth 1 -print0 | xargs -0 rm -rf
 	(cd ${GIT_DIRECTORY} && git init)
+
+git-remote-add:
 .if defined(GIT_REMOTE_URL)
 	(cd ${GIT_DIRECTORY} && git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL})
 .else
-	@echo "GIT_REMOTE_URL is not defined, skipping git remote add"
+	@echo "GIT_REMOTE_URL is not defined, skipping"
 .endif
 
 rm-cvsignore:
